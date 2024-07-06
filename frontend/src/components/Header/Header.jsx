@@ -2,7 +2,7 @@
 
 const Header = () => {
   return (
-    <div className="header_main">
+<div className="header_main">
     <div className="mobile_menu">
        <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="logo_mobile"><a href="index.html"><img src="src/assets/images/logo.png"/></a></div>
