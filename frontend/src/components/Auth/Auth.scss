@@ -3,7 +3,7 @@
 .form-container {
   position: relative;
   min-height: 100vh;
-  background-color: #e1e8ee;
+  background-color: #131416;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,7 +31,7 @@
     background-repeat: no-repeat;
     background-position: left bottom;
     background-size: 500px;
-    background-image: url("https://images.unsplash.com/photo-1503602642458-232111445657?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bf884ad570b50659c5fa2dc2cfb20ecf&auto=format&fit=crop&w=1000&q=100");
+    background-image: url("src/assets/images/authhero8.jpg");
   }
 
   .signup {
@@ -227,7 +227,7 @@
       }
 
       .submit-btn {
-        background-color: #6b92a4;
+        background-color: #b60213;
         color: rgba(256, 256, 256, 0.7);
         border: 0;
         border-radius: 15px;
