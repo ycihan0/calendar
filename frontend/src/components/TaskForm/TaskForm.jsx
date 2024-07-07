@@ -5,7 +5,7 @@ const TaskForm = () => {
 <div className="background_bg">
 <div className="contact_section layout_padding">
     <div className="container">
-       <h1 className="watchs_taital">01<br/>ETKİNLİK EKLE</h1>
+       <h1 className="watchs_taital">01<br/>OLAY EKLE</h1>
     </div>
     <div className="contact_section_2">
        <div className="container-fluid">
