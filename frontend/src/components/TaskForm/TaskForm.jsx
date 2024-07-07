@@ -23,19 +23,14 @@ const TaskForm = () => {
                     <label className="input-label" htmlFor="startTime">Bitiş Tarihi: </label>
                     <input type="datetime-local" className="mail_text" placeholder="Bitiş Tarihi" name="Email"/>
                  </div>
-                 <div className="input-group">
-                    <label className="input-label" htmlFor="startTime">Bitiş Tarihi: </label>
-                    <input type="select-box" className="mail_text" placeholder="Bitiş Tarihi" name="Email"/>
-                    <select className="mail_text"  name="options">
-    <option value="option1">Seçenek 1</option>
-    <option value="option2">Seçenek 2</option>
-    <option value="option3">Seçenek 3</option>
-  </select>
-                 </div>
-                   
-                   
-                   <textarea className="massage-bt" placeholder="Massage" rows="5" id="comment" name="Massage"></textarea>
-                   <div className="send_bt"><a href="#">SEND</a></div>
+                   <div className="input-group">
+                     <select className="mail_text"  name="options" defaultValue="">
+                        <option value="" disabled>Lütfen bir seçenek belirleyin</option>
+                        <option value="option1">Bu bir görev🗒️</option>
+                        <option value="option2">Bu bir etkinlik🎉 </option>
+                     </select>
+                   </div>
+                   <div className="send_bt"><a href="#">EKLE</a></div>
                 </div>
              </div>
              <div className="col-md-6 padding_right_0">
