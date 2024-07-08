@@ -17,6 +17,11 @@ router.get("/", async (req, res) => {
 //create a new user
 router.post("/", async (req, res) => {
     try {
+      const existingUser = await User.findOne({ email: req.body.email });
+      if (existingUser) {
+        return res.status(400).json({ error: "Email already exists." });
+      }
+  
       const newUser = new User(req.body);
       await newUser.save();
       res.status(201).json(newUser);
