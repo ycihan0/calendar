@@ -10,4 +10,5 @@ export const taskSchema = Yup.object({
       Yup.ref("startDate"),
       "Bitiş tarihi, başlangıç tarihinden sonra olmalıdır."
     ),
+  userId: Yup.string(),
 });

@@ -1,32 +1,59 @@
 import { useFormik } from "formik";
 import "./TaskForm.scss";
 import { taskSchema } from "../../schema/taskSchema";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const TaskForm = () => {
   const [selectedOption, setSelectedOption] = useState("");
+  const [userId, setUserId] = useState("");
+
+  useEffect(() => {
+   const user = JSON.parse(localStorage.getItem("user"));
+   if (user && user.id) {
+     setUserId(user.id);
+   }
+   console.log(user.id)
+ }, []);
 
   const handleChangeOption = (e) => {
     setSelectedOption(e.target.value);
-    console.log(selectedOption);
   };
 
   const onSubmit = async (values, actions) => {
-   console.log("here")
-    // try {
-    //   const res = await axios.post(
-    //     `${import.meta.env.VITE_API_BASE_URL}/users`,
-    //     values
-    //   );
-    //   if (res.status === 201) {
-    //     actions.resetForm();
-    //     toast.success("Kayıt Başarılı");
-    //     toggleForm();
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    //   toast.error("Kullanıcı zaten kayıtlı");
-    // }
+   values.userId = userId;
+    if (selectedOption === "task") {
+      try {
+        const res = await axios.post(
+          `${import.meta.env.VITE_API_BASE_URL}/tasks`,
+          values
+        );
+        if (res.status === 201) {
+          actions.resetForm();
+          toast.success("Görev Başarıyla Eklendi");
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error("Birşeyler ters gitti.");
+      }
+    }else if (selectedOption === "event") {
+      try {
+        const res = await axios.post(
+          `${import.meta.env.VITE_API_BASE_URL}/events`,
+          values
+        );
+        if (res.status === 201) {
+          actions.resetForm();
+          toast.success("Etkinlik Başarıyla Eklendi");
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error("Birşeyler ters gitti.");
+      }
+    } else {
+      toast.error("Lütfen form verilerini kontrol ediniz");
+    }
   };
 
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
@@ -35,6 +62,7 @@ const TaskForm = () => {
         title: "",
         startDate: "",
         endDate: "",
+        userId: "1234",
       },
       onSubmit,
       validationSchema: taskSchema,
@@ -104,22 +132,33 @@ const TaskForm = () => {
                     )}
                   </div>
                   <div className="input-group">
-                    <select
-                      className="mail_text"
-                      name="options"
-                      value={selectedOption}
-                      onChange={handleChangeOption}
-                    >
-                      <option value="" disabled>
-                        Lütfen bir seçenek belirleyin
-                      </option>
-                      <option value="task">Bu bir görev🗒️</option>
-                      <option value="event">Bu bir etkinlik🎉 </option>
-                    </select>
+                    <label className="input-label" htmlFor="startTime">
+                      Seçiniz:
+                    </label>
+                    <label className="mail_text">
+                      <input
+                        type="radio"
+                        name="options"
+                        value="task"
+                        className="radio-input"
+                        checked={selectedOption === "task"}
+                        onChange={handleChangeOption}
+                      />
+                      Bu bir görev🗒️
+                    </label>
+                    <label className="mail_text">
+                      <input
+                        type="radio"
+                        name="options"
+                        value="event"
+                        checked={selectedOption === "event"}
+                        className="radio-input"
+                        onChange={handleChangeOption}
+                      />
+                      Bu bir etkinlik🎉
+                    </label>
                   </div>
-                  <div type="submit" className="send_bt">
-                    <a href="#">EKLE</a>
-                  </div>
+                  <button type="submit" className="button-submit">EKLE</button>
                 </div>
               </div>
               <div className="col-md-6 padding_right_0">
