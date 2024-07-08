@@ -26,5 +26,26 @@ router.post("/", async (req, res) => {
     }
   });
 
+  //Login
+router.post("/login", async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(401).json({ error: "Invalid email." });
+    }
+
+    res.status(200).json({
+      id: user.id,
+      email: user.email,
+      username: user.username,
+    });
+    console.log(req.body);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
 
   module.exports = router;
