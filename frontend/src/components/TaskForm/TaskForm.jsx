@@ -14,7 +14,6 @@ const TaskForm = () => {
    if (user && user.id) {
      setUserId(user.id);
    }
-   console.log(user.id)
  }, []);
 
   const handleChangeOption = (e) => {
