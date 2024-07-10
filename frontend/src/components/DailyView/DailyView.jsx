@@ -8,7 +8,7 @@ const DailyView = () => {
           <h1 className="watchs_taital">
             02
             <br />
-            GÜNLÜK OLAYLAR
+            GÜNLÜK PLANLAR
           </h1>
         </div>
         <div className="contact_section_2">

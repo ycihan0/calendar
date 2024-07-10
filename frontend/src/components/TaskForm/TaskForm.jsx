@@ -62,7 +62,7 @@ const TaskForm = () => {
         title: "",
         startDate: "",
         endDate: "",
-        userId: "1234",
+        description: "",
       },
       onSubmit,
       validationSchema: taskSchema,
@@ -75,7 +75,7 @@ const TaskForm = () => {
           <h1 className="watchs_taital">
             01
             <br />
-            OLAY EKLE
+            PLAN EKLE
           </h1>
         </div>
         <div className="contact_section_2">
@@ -133,6 +133,22 @@ const TaskForm = () => {
                   </div>
                   <div className="input-group">
                     <label className="input-label" htmlFor="startTime">
+                      Açıklama:
+                    </label>
+                    <input
+                      className="mail_text"
+                      placeholder="Bir açıklama giriniz."
+                      name="description"
+                      value={values.description}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    {touched.description && (
+                      <span className="error-messages">{errors.description}</span>
+                    )}
+                  </div>
+                  <div className="input-group">
+                    <label className="input-label" htmlFor="startTime">
                       Seçiniz:
                     </label>
                     <label className="mail_text">
@@ -158,6 +174,7 @@ const TaskForm = () => {
                       Bu bir etkinlik🎉
                     </label>
                   </div>
+                  
                   <button type="submit" className="button-submit">EKLE</button>
                 </div>
               </div>
