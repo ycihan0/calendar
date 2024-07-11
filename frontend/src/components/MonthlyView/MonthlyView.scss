@@ -86,3 +86,24 @@
   border: none;
   cursor: default;
 }
+
+.calendar-events{
+   padding-left: 6px;   
+   padding-right: 6px; 
+   margin-right: 5px;
+    background-color:#b60213 ;
+    border-radius:4px ;
+    color: #ddd;
+}
+
+.calendar-tasks{
+  padding-left: 6px;   
+  padding-right: 6px; 
+  margin-right: 5px;
+   background-color:#41516c ;
+   border-radius:4px ;
+   color: #ddd;
+}
+.calendar-plans{
+  overflow: hidden;
+}

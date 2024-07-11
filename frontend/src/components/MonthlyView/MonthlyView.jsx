@@ -1,23 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./MonthlyView.scss" 
+import axios from "axios";
 
 const MonthlyView = () => {
-
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
   const [currentDate, setCurrentDate] = useState(new Date());
-
   const daysOfWeek = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'];
+  const [events, setEvents]=useState([]);
+  const [tasks, setTasks]=useState([]);
+  
 
   //Ayın ilk gününü bulma fonksiyonu 
   const getFirstDayOfMonth = (month, year) => {
     const day = new Date(year, month, 1).getDay();
     //buradaki 1 ayın ilk gününü temsil eder ayın 1'i bu tarihtir.
-    console.log(day);
     return day === 0 ? 6 : day - 1;
   };
 
   //Bir ayda kaç gün olduğunu bulma fonksiyonu
   const getDaysInMonth = (month, year) => {
     return new Date(year, month + 1, 0).getDate();
+  };
+
+
+  const handleDayClick = (day) => {
+    const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
+    //  console.log(date)
+    // navigate(`/date/${date.toISOString().split('T')[0]}`);
   };
 
   const renderDays = () => {
@@ -32,9 +41,37 @@ const MonthlyView = () => {
 
     // Ayın günlerini ekleme
     for (let i = 1; i <= totalDays; i++) {
+      const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), i);
+      //Takvimdeki gün ile etkinlikteki eşit olan günleri filtrele
+      const currentDayEvents = events.filter(event => {
+        const eventDate = new Date(event.startDate);
+        return (
+          eventDate.getFullYear() === date.getFullYear() &&
+          eventDate.getMonth() === date.getMonth() &&
+          eventDate.getDate() === date.getDate()
+        );
+      });
+  
+      const currentDayTasks = tasks.filter(task => {
+        const taskDate = new Date(task.startDate);
+        return (
+          taskDate.getFullYear() === date.getFullYear() &&
+          taskDate.getMonth() === date.getMonth() &&
+          taskDate.getDate() === date.getDate()
+        );
+      });
+
       days.push(
-        <div key={i} className="calendar-day">
-          {i}
+        <div key={i} className="calendar-day" onClick={() => handleDayClick(i)}>
+          {i}<br />
+          <div className="calendar-plans">
+            {currentDayEvents.map((event, index) => (
+              <span key={index} className="calendar-events">{event.title}<br/></span>
+            ))}
+            {currentDayTasks.map((task, index) => (
+              <span key={index} className="calendar-tasks">{task.title}<br/></span>
+            ))}
+          </div>
         </div>
       );
     }
@@ -51,6 +88,23 @@ const MonthlyView = () => {
     e.preventDefault();
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
   };
+  
+  useEffect(() => {
+    const getAllData = async () => {
+      try {
+        const [eventsRes, tasksRes] = await Promise.all([
+          axios.get(`${apiUrl}/events`),
+          axios.get(`${apiUrl}/tasks`)
+        ]);
+        setEvents(eventsRes.data);
+        setTasks(tasksRes.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getAllData();
+  }, [apiUrl]);
 
   return (
     <div className="background_bg">
@@ -66,7 +120,6 @@ const MonthlyView = () => {
           <div className="container-fluid">
             <div className="row">
               
-
 
 
 
@@ -108,14 +161,6 @@ const MonthlyView = () => {
           
 
             <div className="calendar">
-              <div className="calendar-header">
-                <button onClick={handlePrevMonth}>Önceki</button>
-                
-                <h2>
-                  {currentDate.toLocaleString('default', { month: 'long' })} {currentDate.getFullYear()}
-                </h2>
-                <button onClick={handleNextMonth}>Sonraki</button>
-              </div>
               <div className="calendar-body">
               <div className="calendar-days-of-week">
                   {daysOfWeek.map((day) => (
