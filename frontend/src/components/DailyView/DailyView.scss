@@ -193,3 +193,62 @@
     color: var(--color);
   }
 }
+
+.daily-button-first{
+  background-color: #c8102e; /* Butonun arka plan rengi */
+  color: white; /* Butonun metin rengi */
+  border: none;
+  // border-radius: 50px; /* Yuvarlak köşeler için */
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  padding: 10px 50px; /* İç boşluklar */
+  font-size: 16px; /* Yazı tipi boyutu */
+  font-weight: bold; /* Yazı tipi kalınlığı */
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; /* Geçiş animasyonu */
+}
+.daily-button-first:hover{
+  background-color: white; /* Hover sırasında arka plan rengi */
+  color: #c8102e; /* Hover sırasında metin rengi */
+  
+}
+
+.daily-button-middle{
+  background-color: #c8102e; /* Butonun arka plan rengi */
+  color: white; /* Butonun metin rengi */
+  border: none;
+  padding: 10px 50px; /* İç boşluklar */
+  font-size: 16px; /* Yazı tipi boyutu */
+  font-weight: bold; /* Yazı tipi kalınlığı */
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; /* Geçiş animasyonu */
+}
+.daily-button-middle:hover{
+  background-color: white; /* Hover sırasında arka plan rengi */
+  color: #c8102e; /* Hover sırasında metin rengi */
+  
+}
+.daily-button-end{
+  background-color: #c8102e; /* Butonun arka plan rengi */
+  color: white; /* Butonun metin rengi */
+  border: none;
+  // border-radius: 50px; /* Yuvarlak köşeler için */
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  padding: 10px 50px; /* İç boşluklar */
+  font-size: 16px; /* Yazı tipi boyutu */
+  font-weight: bold; /* Yazı tipi kalınlığı */
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; /* Geçiş animasyonu */
+}
+.daily-button-end:hover{
+  background-color: white; /* Hover sırasında arka plan rengi */
+  color: #c8102e; /* Hover sırasında metin rengi */
+  
+}
+.daily-buttons{
+  display: flex;
+  justify-content: center; /* Butonları yatay olarak ortala */
+ /* Butonlar arasında boşluk bırak */
+
+}

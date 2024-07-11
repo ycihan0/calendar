@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
+import Proptypes from "prop-types";
+import { useState } from "react";
 import "./MonthlyView.scss" 
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const MonthlyView = () => {
-  const apiUrl = import.meta.env.VITE_API_BASE_URL;
+const MonthlyView = ({tasks, events}) => {
+  
   const [currentDate, setCurrentDate] = useState(new Date());
   const daysOfWeek = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'];
-  const [events, setEvents]=useState([]);
-  const [tasks, setTasks]=useState([]);
+
   const navigate = useNavigate();
 
   //Ayın ilk gününü bulma fonksiyonu 
@@ -26,7 +25,7 @@ const MonthlyView = () => {
 
   const handleDayClick = (day) => {
     const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
-    navigate(`/dailyview/${date.toISOString()}`);
+    navigate(`/daily/${date.toISOString()}`);
   };
 
   const renderDays = () => {
@@ -77,23 +76,7 @@ const MonthlyView = () => {
     e.preventDefault();
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
   };
-  
-  useEffect(() => {
-    const getAllData = async () => {
-      try {
-        const [eventsRes, tasksRes] = await Promise.all([
-          axios.get(`${apiUrl}/events`),
-          axios.get(`${apiUrl}/tasks`)
-        ]);
-        setEvents(eventsRes.data);
-        setTasks(tasksRes.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getAllData();
-  }, [apiUrl]);
+ 
 
   return (
     <div className="background_bg">
@@ -181,6 +164,11 @@ const MonthlyView = () => {
 }
 
 export default MonthlyView
+
+MonthlyView.propTypes = {
+  events: Proptypes.array,
+  tasks: Proptypes.array,
+};
 
 
 //Bazı unutulan  Methodlar;

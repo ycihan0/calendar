@@ -1,20 +1,17 @@
-import DailyView from "../DailyView/DailyView";
+import { Outlet } from "react-router-dom";
 import Header from "../Header/Header";
-import MonthlyView from "../MonthlyView/MonthlyView";
 import Slider from "../Slider/Slider";
-import TaskForm from "../TaskForm/TaskForm";
+import React from "react";
 
 const Home = () => {
   return (
-    <div>
+    <React.Fragment>
       <div className="header_section">
         <Header />
         <Slider />
       </div>
-      <MonthlyView/>
-      <DailyView/>
-      <TaskForm />
-    </div>
+      <Outlet />
+    </React.Fragment>
   );
 };
 

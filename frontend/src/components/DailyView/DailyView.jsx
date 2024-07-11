@@ -1,11 +1,41 @@
+import Proptypes from "prop-types";
 import { useParams } from "react-router-dom";
 import "./DailyView.scss";
+import { useEffect, useState } from "react";
 
 
-const DailyView = () => {
+const DailyView = ({tasks, events}) => {
   const params = useParams();
-  console.log(params.date)
+  const [filteredTasks, setFilteredTasks] = useState([]);
+  const [filteredEvents, setFilteredEvents] = useState([]);
+   const [plans, setPlans] = useState([]);
+  const [currentArray, setcurrentArray] = useState([]);
+
+  const [date, setDate]=useState(new Date())
  
+
+
+  useEffect(() => {
+    const newDate = params.date ? new Date(params.date) : new Date();
+    setDate(newDate);
+
+
+    const  newTasks= tasks.filter((task=> new Date(task.startDate).toDateString() === date.toDateString())).map(task => ({ ...task, type: 'task' }));
+
+    const newEvents = events.filter(event => new Date(event.startDate).toDateString() === date.toDateString()).map(task => ({ ...task, type: 'event' }));
+
+    const mergedArray = [...newTasks, ...newEvents].sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
+  
+    setFilteredTasks(newTasks);
+    setFilteredEvents(newEvents);
+    setPlans(mergedArray);
+    setcurrentArray(mergedArray)
+
+ console.log(plans)
+
+  }, [params.date, tasks, events]);
+
+
   return (
     <div className="background_bg">
       <div className="contact_section layout_padding">
@@ -19,7 +49,16 @@ const DailyView = () => {
         <div className="contact_section_2">
           <div className="container-fluid">
             <div className="row">
+
+
+
+
+
+
+
+
               <div className="daily-body">
+
                 <ul>
                   <li style={{ "--accent-color": "#41516C" }}>
                     <div className="date">2002</div>
@@ -70,6 +109,40 @@ const DailyView = () => {
                 </ul>
                 
               </div>
+
+
+
+ 
+             
+
+       <div className="read_bt">
+        <div className="daily-buttons">
+        <div className="daily-button-first" onClick={()=>setcurrentArray(plans)}>Hepsi</div>
+                <div className="daily-button-middle" onClick={()=>setcurrentArray(filteredEvents)}>Etkinlikler</div>
+                <div className="daily-button-end" onClick={()=>setcurrentArray(filteredTasks)}>Görevler</div>
+        </div>
+               
+             </div>
+             
+          
+      
+
+     
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </div>
           </div>
         </div>
@@ -79,3 +152,8 @@ const DailyView = () => {
 };
 
 export default DailyView;
+
+DailyView.propTypes = {
+  events: Proptypes.array,
+  tasks: Proptypes.array,
+};
