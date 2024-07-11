@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Auth from "./components/Auth/Auth";
 import Home from "./components/Home/Home";
 import { useEffect, useState } from "react";
+import DailyView from "./components/DailyView/DailyView";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -20,6 +21,7 @@ function App() {
       <Route path="/" element={isAuthenticated ? <Home /> : <Auth />} />
       <Route path="/auth" element={<Auth />} />
       <Route path="/home" element={<Home />} />
+      <Route path="/dailyview/:date" element={<DailyView />} />
     </Routes>
   );
 }

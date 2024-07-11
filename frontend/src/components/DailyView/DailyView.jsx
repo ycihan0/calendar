@@ -1,6 +1,11 @@
+import { useParams } from "react-router-dom";
 import "./DailyView.scss";
 
+
 const DailyView = () => {
+  const params = useParams();
+  console.log(params.date)
+ 
   return (
     <div className="background_bg">
       <div className="contact_section layout_padding">

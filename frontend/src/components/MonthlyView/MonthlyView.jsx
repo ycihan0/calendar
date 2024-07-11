@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./MonthlyView.scss" 
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const MonthlyView = () => {
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
@@ -8,7 +9,7 @@ const MonthlyView = () => {
   const daysOfWeek = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'];
   const [events, setEvents]=useState([]);
   const [tasks, setTasks]=useState([]);
-  
+  const navigate = useNavigate();
 
   //Ayın ilk gününü bulma fonksiyonu 
   const getFirstDayOfMonth = (month, year) => {
@@ -25,8 +26,7 @@ const MonthlyView = () => {
 
   const handleDayClick = (day) => {
     const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
-    //  console.log(date)
-    // navigate(`/date/${date.toISOString().split('T')[0]}`);
+    navigate(`/dailyview/${date.toISOString()}`);
   };
 
   const renderDays = () => {
@@ -43,26 +43,15 @@ const MonthlyView = () => {
     for (let i = 1; i <= totalDays; i++) {
       const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), i);
       //Takvimdeki gün ile etkinlikteki eşit olan günleri filtrele
-      const currentDayEvents = events.filter(event => {
-        const eventDate = new Date(event.startDate);
-        return (
-          eventDate.getFullYear() === date.getFullYear() &&
-          eventDate.getMonth() === date.getMonth() &&
-          eventDate.getDate() === date.getDate()
-        );
-      });
-  
-      const currentDayTasks = tasks.filter(task => {
-        const taskDate = new Date(task.startDate);
-        return (
-          taskDate.getFullYear() === date.getFullYear() &&
-          taskDate.getMonth() === date.getMonth() &&
-          taskDate.getDate() === date.getDate()
-        );
-      });
+      const currentDayEvents = events.filter(event => new Date(event.startDate).toDateString() === date.toDateString());
+
+       const currentDayTasks = tasks.filter(task=> new Date(task.startDate).toDateString() === date.toDateString());
+      
 
       days.push(
-        <div key={i} className="calendar-day" onClick={() => handleDayClick(i)}>
+        <div key={i} className={
+          new Date().toDateString()===date.toDateString() ?"calendar-day-active":"calendar-day"}
+           onClick={() => handleDayClick(i)}>
           {i}<br />
           <div className="calendar-plans">
             {currentDayEvents.map((event, index) => (
@@ -137,10 +126,10 @@ const MonthlyView = () => {
 
                 </div>
                 <a className="carousel-control-prev" href="#" onClick={handlePrevMonth}>
-                <i className="fa fa-plus" style={{ fontSize:'24px', color:'#fff'}}></i>
+                <i className="fa fa-minus" style={{ fontSize:'24px', color:'#fff'}}></i>
                 </a>
                 <a className="carousel-control-next" href="#" onClick={handleNextMonth}>
-                <i className="fa fa-minus" style={{ fontSize:'24px', color:'#fff'}}></i>
+                <i className="fa fa-plus" style={{ fontSize:'24px', color:'#fff'}}></i>
                 </a>
               </div>
           </div>
