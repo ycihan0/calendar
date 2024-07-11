@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import DailyView from "./components/DailyView/DailyView";
 import axios from "axios";
 import MonthlyView from "./components/MonthlyView/MonthlyView";
+import WeeklyView from "./components/WeeklyView/WeeklyView";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -44,6 +45,10 @@ function App() {
         <Route
           path="monthly"
           element={<MonthlyView events={events} tasks={tasks} />}
+        />
+        <Route
+          path="weekly"
+          element={<WeeklyView events={events} tasks={tasks} />}
         />
         <Route
           path="daily/:date"
