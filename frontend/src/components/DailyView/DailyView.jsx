@@ -60,15 +60,16 @@ const DailyView = ({tasks, events}) => {
               <div className="daily-body">
 
                 <ul>
-                  <li style={{ "--accent-color": "#41516C" }}>
-                    <div className="date">2002</div>
-                    <div className="title">Title 1</div>
+                  {currentArray.map((plan)=>(
+                    <li key={plan._id} style={{ "--accent-color": "#41516C" }}>
+                    <div className="date">{plan.startDate}</div>
+                    <div className="title">{plan.title}</div>
                     <div className="descr">
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                      Quas itaque hic quibusdam fugiat est numquam harum,
-                      accusamus suscipit consequatur laboriosam!
+                   {plan.description}
                     </div>
                   </li>
+                  ))}
+                  
 
                   <li style={{ "--accent-color": "#FBCA3E" }}>
                     <div className="date">2007</div>
