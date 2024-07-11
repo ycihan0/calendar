@@ -21,6 +21,8 @@
   font-family: "Poppins", sans-serif;
   color: var(--color);
   background: var(--bgColor);
+  width: 100vw; /* Ekran genişliğinde olacak şekilde */
+
 }
 
 .daily-body {
@@ -35,6 +37,7 @@
     list-style: none;
     width: min(60rem, 90%);
     margin-inline: auto;
+    
   }
 
   /* line */
@@ -61,6 +64,7 @@
     grid-row: span 2;
     display: grid;
     grid-template-rows: min-content min-content min-content;
+   
   }
 
   /* date */
@@ -118,6 +122,7 @@
     background: var(--bgColor);
     position: relative;
     padding-inline: 1.5rem;
+   
   }
   ul li .title {
     overflow: hidden;
@@ -250,5 +255,15 @@
   display: flex;
   justify-content: center; /* Butonları yatay olarak ortala */
  /* Butonlar arasında boşluk bırak */
+
+}
+
+.carousel-no-data{
+  width: 100vw;
+  height: 80vh; /* Ekranın tamamını kaplasın */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center; /* İçerik ortalanması için */
 
 }
