@@ -1,0 +1,198 @@
+.weekly-view {
+  width: 100vw;
+  padding: 40px;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    h1 {
+      margin: 0;
+    }
+
+    button {
+      background-color: #41516c;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #2b3a4c;
+      }
+    }
+  }
+
+  .calendar {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    .days {
+      display: flex;
+      flex-wrap: wrap; /* Küçük ekranlarda günlerin alt alta geçmesini sağlar */
+
+      .day {
+        flex: 1 1 calc(100% / 7); /* Eşit olarak genişliği 7 güne böler */
+        padding: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 10px; /* Küçük ekranlarda günlerin arasında boşluk bırakır */
+
+        .date {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-bottom: 0.5rem;
+
+          .date-num {
+            font-size: 1.5rem;
+          }
+
+          .date-day {
+            font-size: 1rem;
+            font-weight: bold;
+          }
+        }
+
+        .events {
+          display: flex;
+          flex-direction: column;
+
+          .event,
+          .task {
+            background-color: #41516c;
+            color: white;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+
+            .title {
+              font-weight: bold;
+            }
+
+            .time {
+              font-size: 0.9rem;
+            }
+          }
+
+          .task {
+            background-color: #e24a68;
+          }
+        }
+      }
+    }
+  }
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-top: 30px;
+  background-color: #090909;
+}
+
+.button-wrapper {
+  display: flex;
+  padding-left: 140px;
+  padding-right: 140px;
+  align-items: center;
+  background-color: #090909;
+}
+
+.button {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #fff; /* Beyaz kenarlık */
+  border-radius: 50%;
+  color: #fff; /* Beyaz yazı rengi */
+  background-color: transparent;
+  font-size: 32px; /* Yazı boyutu */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.button-label {
+  color: #fff; /* Beyaz yazı rengi */
+  margin-top: 5px;
+  font-size: 32px;
+  padding: 15px;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .button-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .button-wrapper {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .button {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+  }
+
+  .button-label {
+    font-size: 18px;
+  }
+
+  .weekly-view {
+    padding: 20px;
+
+    .calendar {
+      .days {
+        .day {
+          flex: 1 1 100%; /* Küçük ekranlarda her gün %100 genişlikte olur ve alt alta gelir */
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .button-wrapper {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
+  .button {
+    width: 60px;
+    height: 60px;
+    font-size: 28px;
+  }
+
+  .button-label {
+    font-size: 20px;
+  }
+
+  .weekly-view {
+    padding: 30px;
+
+    .calendar {
+      .days {
+        .day {
+          flex: 1 1 calc(100% / 3); /* Orta büyüklükteki ekranlarda her satırda 3 gün */
+        }
+      }
+    }
+  }
+}
