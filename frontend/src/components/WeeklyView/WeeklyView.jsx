@@ -26,8 +26,16 @@ const WeeklyView = ({ tasks, events }) => {
 
   const renderDays = () => {
     return weekDays.map((date) => {
-      const dayEvents = events.filter(event => moment(event.startDate).isSame(date, 'day'));
-      const dayTasks = tasks.filter(task => moment(task.startDate).isSame(date, 'day'));
+
+      const dayEvents = events.filter(event => moment(event.startDate).isSame(date, 'day')).map((event) => ({ ...event, type: "event" }));
+
+      const dayTasks = tasks.filter(task => moment(task.startDate).isSame(date, 'day')).map((task) => ({ ...task, type: "task" }));
+
+      const mergedArray = [...dayEvents, ...dayTasks].sort(
+        (a, b) => new Date(a.startDate) - new Date(b.startDate)
+      );
+    
+
 
       return (
         <div key={date} className="day" onClick={() => handleDayClick(date)}>
@@ -35,17 +43,11 @@ const WeeklyView = ({ tasks, events }) => {
             <p className="date-num">{date.getDate()}</p>
             <p className="date-day">{moment(date).format('ddd')}</p>
           </div>
-          <div className="events">
-            {dayEvents.map((event, index) => (
-              <div key={index} className="event">
-                <p className="title">{event.title}</p>
-                <p className="time">{moment(event.startDate).format('HH:mm')} - {moment(event.endDate).format('HH:mm')}</p>
-              </div>
-            ))}
-            {dayTasks.map((task, index) => (
-              <div key={index} className="task">
-                <p className="title">{task.title}</p>
-                <p className="time">{moment(task.startDate).format('HH:mm')} - {moment(task.endDate).format('HH:mm')}</p>
+          <div className={"events"}>
+            {mergedArray.map((plan, index) => (
+              <div key={index} className={plan.type==="event"?"task":"event"}>
+                <p className="title">{plan.title}</p>
+                <p className="time">{moment(plan.startDate).format('DD/MM/YYYY HH:mm')} - {moment(plan.endDate).format('DD/MM/YYYY HH:mm')}</p>
               </div>
             ))}
           </div>
@@ -140,3 +142,5 @@ WeeklyView.propTypes = {
 };
 
 export default WeeklyView;
+
+//isSame moment kütüphanesinin arih ve zaman işlemlerini kolaylaştırmak için

@@ -44,7 +44,7 @@
         flex-direction: column;
         align-items: center;
         margin-bottom: 10px; /* Küçük ekranlarda günlerin arasında boşluk bırakır */
-
+        min-height: 350px;
         .date {
           display: flex;
           flex-direction: column;
