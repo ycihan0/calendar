@@ -15,8 +15,10 @@ const DailyView = ({ tasks, events }) => {
 
   useEffect(() => {
     setPlans([]);
-
-    const newDate = params.date ? new Date(params.date) : new Date();
+   // Eğer params.date tanımsız veya geçersiz bir tarihse bugünün tarihini kullan
+   const newDate = params.date && !isNaN(Date.parse(params.date))
+   ? new Date(params.date)
+   : new Date();
 
     const newTasks = tasks
       .filter(

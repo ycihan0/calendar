@@ -1,16 +1,15 @@
 import Proptypes from "prop-types";
 import { useState } from "react";
-import "./MonthlyView.scss" 
+import "./MonthlyView.scss";
 import { useNavigate } from "react-router-dom";
 
-const MonthlyView = ({tasks, events}) => {
-  
+const MonthlyView = ({ tasks, events }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const daysOfWeek = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'];
+  const daysOfWeek = ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"];
 
   const navigate = useNavigate();
 
-  //Ayın ilk gününü bulma fonksiyonu 
+  //Ayın ilk gününü bulma fonksiyonu
   const getFirstDayOfMonth = (month, year) => {
     const day = new Date(year, month, 1).getDay();
     //buradaki 1 ayın ilk gününü temsil eder ayın 1'i bu tarihtir.
@@ -22,16 +21,25 @@ const MonthlyView = ({tasks, events}) => {
     return new Date(year, month + 1, 0).getDate();
   };
 
-
   const handleDayClick = (day) => {
-    const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
+    const date = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      day
+    );
     navigate(`/daily/${date.toISOString()}`);
   };
 
   const renderDays = () => {
     const days = [];
-    const firstDay = getFirstDayOfMonth(currentDate.getMonth(), currentDate.getFullYear());
-    const totalDays = getDaysInMonth(currentDate.getMonth(), currentDate.getFullYear());
+    const firstDay = getFirstDayOfMonth(
+      currentDate.getMonth(),
+      currentDate.getFullYear()
+    );
+    const totalDays = getDaysInMonth(
+      currentDate.getMonth(),
+      currentDate.getFullYear()
+    );
 
     // Boş hücreler ekleme
     for (let i = 0; i < firstDay; i++) {
@@ -40,24 +48,46 @@ const MonthlyView = ({tasks, events}) => {
 
     // Ayın günlerini ekleme
     for (let i = 1; i <= totalDays; i++) {
-      const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), i);
+      const date = new Date(
+        currentDate.getFullYear(),
+        currentDate.getMonth(),
+        i
+      );
       //Takvimdeki gün ile etkinlikteki eşit olan günleri filtrele
-      const currentDayEvents = events.filter(event => new Date(event.startDate).toDateString() === date.toDateString());
+      const currentDayEvents = events.filter(
+        (event) =>
+          new Date(event.startDate).toDateString() === date.toDateString()
+      );
 
-       const currentDayTasks = tasks.filter(task=> new Date(task.startDate).toDateString() === date.toDateString());
-      
+      const currentDayTasks = tasks.filter(
+        (task) =>
+          new Date(task.startDate).toDateString() === date.toDateString()
+      );
 
       days.push(
-        <div key={i} className={
-          new Date().toDateString()===date.toDateString() ?"calendar-day-active":"calendar-day"}
-           onClick={() => handleDayClick(i)}>
-          {i}<br />
+        <div
+          key={i}
+          className={
+            new Date().toDateString() === date.toDateString()
+              ? "calendar-day-active"
+              : "calendar-day"
+          }
+          onClick={() => handleDayClick(i)}
+        >
+          {i}
+          <br />
           <div className="calendar-plans">
             {currentDayEvents.map((event, index) => (
-              <span key={index} className="calendar-events">{event.title}<br/></span>
+              <span key={index} className="calendar-events">
+                {event.title}
+                <br />
+              </span>
             ))}
             {currentDayTasks.map((task, index) => (
-              <span key={index} className="calendar-tasks">{task.title}<br/></span>
+              <span key={index} className="calendar-tasks">
+                {task.title}
+                <br />
+              </span>
             ))}
           </div>
         </div>
@@ -69,14 +99,17 @@ const MonthlyView = ({tasks, events}) => {
 
   const handlePrevMonth = (e) => {
     e.preventDefault();
-    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
+    setCurrentDate(
+      new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1)
+    );
   };
 
   const handleNextMonth = (e) => {
     e.preventDefault();
-    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
+    setCurrentDate(
+      new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1)
+    );
   };
- 
 
   return (
     <div className="background_bg">
@@ -91,85 +124,53 @@ const MonthlyView = ({tasks, events}) => {
         <div className="contact_section_2">
           <div className="container-fluid">
             <div className="row">
-              
+              <div className="banner_section layout_padding">
+                <div
+                  id="main_slider"
+                  className="carousel slide"
+                  data-ride="carousel"
+                >
+                  <div className="button-container">
+                    <div className="button-wrapper" onClick={handlePrevMonth}>
+                      <button className="button">-</button>
+                    </div>
+                    <h1 className="banner_taital">
+                      {currentDate.toLocaleString("default", { month: "long" })}{" "}
+                      {currentDate.getFullYear()}
+                    </h1>
+                    <div className="button-wrapper" onClick={handleNextMonth}>
+                      <button className="button">+</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-
-
-
-
-
-            <div className="banner_section layout_padding">
-              <div id="main_slider" className="carousel slide" data-ride="carousel">
-                <div className="carousel-inner">
-                    <div className="carousel-item active">
-                      <div className="container">
-                          <h1 className="banner_taital">{currentDate.toLocaleString('default', { month: 'long' })} {currentDate.getFullYear()}</h1>
+              <div className="calendar">
+                <div className="calendar-body">
+                  <div className="calendar-days-of-week">
+                    {daysOfWeek.map((day) => (
+                      <div key={day} className="calendar-day-of-week">
+                        {day}
                       </div>
-                    </div>
-
+                    ))}
+                  </div>
+                  <div className="calendar-grid">{renderDays()}</div>
                 </div>
-                <a className="carousel-control-prev" href="#" onClick={handlePrevMonth}>
-                <i className="fa fa-minus" style={{ fontSize:'24px', color:'#fff'}}></i>
-                </a>
-                <a className="carousel-control-next" href="#" onClick={handleNextMonth}>
-                <i className="fa fa-plus" style={{ fontSize:'24px', color:'#fff'}}></i>
-                </a>
               </div>
-          </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          
-
-            <div className="calendar">
-              <div className="calendar-body">
-              <div className="calendar-days-of-week">
-                  {daysOfWeek.map((day) => (
-                    <div key={day} className="calendar-day-of-week">
-                      {day}
-                    </div>
-                  ))}
-                </div>
-                <div className="calendar-grid">{renderDays()}</div>
-              </div>
-            </div>
-
-
-
-
-
-
-
-
-
-
-
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default MonthlyView
+export default MonthlyView;
 
 MonthlyView.propTypes = {
   events: Proptypes.array,
   tasks: Proptypes.array,
 };
-
 
 //Bazı unutulan  Methodlar;
 // 1- new Date();

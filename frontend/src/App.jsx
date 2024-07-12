@@ -36,7 +36,7 @@ function App() {
     };
 
     getAllData();
-  }, [apiUrl]);
+  }, [apiUrl, events, tasks]);
 
   return (
     <Routes>
@@ -52,6 +52,10 @@ function App() {
         />
         <Route
           path="daily/:date"
+          element={<DailyView events={events} tasks={tasks} />}
+        />
+        <Route
+          path="daily"
           element={<DailyView events={events} tasks={tasks} />}
         />
       </Route>

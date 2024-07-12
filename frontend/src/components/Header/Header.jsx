@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import "./Header.css";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [user, setUser] = useState("");
+
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const getUserFromLocalStorage = () => {
@@ -20,7 +24,7 @@ const Header = () => {
   };
 
   return (
-    <div className="header_main">
+    <header className="header_main">
       <div className="mobile_menu">
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="logo_mobile">
@@ -41,29 +45,64 @@ const Header = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
-              <li className="nav-item active">
-                <a className="nav-link" href="index.html">
-                  Home
+              <li className={`nav-item ${(pathname === "/" || pathname === "/home") && "active"}`}>
+                <a
+                  className="nav-link"
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate("/home");
+                  }}
+                >
+                  Anasayfa
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link" href="about.html">
-                  About
+              <li className={`nav-item ${(pathname === "/addplan") && "active"}`}>
+                <a
+                  className="nav-link"
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate("/addplan");
+                  }}
+                >
+                  Plan Ekle
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link" href="watchs.html">
-                  Watchs
+              <li className={`nav-item ${(pathname === "/monthly") && "active"}`}>
+                <a
+                  className="nav-link"
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate("/monthly");
+                  }}
+                >
+                  Aylık
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link " href="testimonial.html">
-                  Testimonial
+              <li className={`nav-item ${(pathname === "/weekly") && "active"}`}>
+                <a
+                  className="nav-link "
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate("/weekly");
+                  }}
+                >
+                  Haftalık
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link " href="contact.html">
-                  Contact
+              <li className={`nav-item ${pathname.startsWith("/daily") && "active"}`}>
+                <a
+                  className="nav-link "
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate("/daily");
+                  }}
+                >
+                  Günlük
                 </a>
               </li>
               <li className="nav-item">
@@ -83,21 +122,62 @@ const Header = () => {
         </div>
         <div className="menu_main">
           <ul>
-            <li className="active">
-              <a href="index.html">Home</a>
+            <li className={pathname === "/"||pathname === "/home"?"active":""}>
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate("/home");
+                }}
+              >
+                Anasayfa
+              </a>
             </li>
-            <li>
-              <a href="about.html">About</a>
+            <li className={pathname === "/addplan" ?"active":""}>
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate("/addplan");
+                }}
+              >
+                Plan Ekle
+              </a>
             </li>
-            <li>
-              <a href="watchs.html">Watchs</a>
+            <li className={pathname === "/monthly" ?"active":""}>
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate("/monthly");
+                }}
+              >
+                Aylık
+              </a>
             </li>
-            <li>
-              <a href="testimonial.html">Testimonial</a>
+            <li className={pathname === "/weekly" ?"active":""}>
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate("/weekly");
+                }}
+              >
+                Haftalık
+              </a>
             </li>
-            <li>
-              <a href="contact.html">Contact us</a>
+            <li className={pathname.startsWith("/daily") ?"active":""}>
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate("/daily");
+                }}
+              >
+                Günlük
+              </a>
             </li>
+
             <li>
               <a href="#" onClick={handleLogout}>
                 <img src="src/assets/images/search-icon.png" />
@@ -106,7 +186,7 @@ const Header = () => {
           </ul>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 
