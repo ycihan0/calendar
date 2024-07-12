@@ -36,11 +36,11 @@ function App() {
     };
 
     getAllData();
-  }, [apiUrl, events, tasks]);
+  }, [apiUrl]);
 
   return (
     <Routes>
-      <Route path="/" element={isAuthenticated ? <Home /> : <Auth />}>
+      <Route path="/" element={isAuthenticated ? <Home events={events} tasks={tasks}/> : <Auth />}>
         <Route path="addplan" element={<TaskForm />} />
         <Route
           path="monthly"
@@ -60,7 +60,7 @@ function App() {
         />
       </Route>
       <Route path="/auth" element={<Auth />} />
-      <Route path="/home" element={<Home />} />
+      <Route path="/home" element={<Home events={events} tasks={tasks}/>} />
     </Routes>
   );
 }
