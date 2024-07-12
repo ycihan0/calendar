@@ -5,7 +5,8 @@
 	flex-flow: column;
 	align-items: center;
 	font-family: "Poppins", serif;
-	background: url("src/assets/images/calendarbg4.jpg")
+	background: url("src/assets/images/calendarbg4.jpg");
+  overflow-x: auto;
 }
 
 .calendar-header {
@@ -25,7 +26,7 @@
 .calendar-days-of-week {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 10px;
+
   padding-bottom: 10px;
   color: #ddd;
 }
@@ -56,6 +57,8 @@
 	flex-wrap: wrap;
 	list-style: none;
     color: #ddd;
+    
+
 }
 
 .calendar-day {
@@ -148,4 +151,13 @@
     font-weight: 300;
     font-size: 0.8rem;
   }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .calendar-day-of-week,
+  .calendar-day,
+  .calendar-day-active{
+    width: 8rem;
+  }
+
 }
