@@ -37,7 +37,7 @@ const NextPlan = ({ tasks, events }) => {
        <div className="watchs_section_2">
           <div className="row">
              <div className="col-md-6">
-                <div className="image_1"><img src="src/assets/images/event.png"/></div>
+                <div className="image_1"><img src="https://res.cloudinary.com/dlg7azrx0/image/upload/v1720887746/calendar/emi0efcp4mcig8wboupn.png"/></div>
              </div>
              <div className="col-md-6">
                 <h4 className="uni_text">{nextEvent===null ?"Yaklaşan bir etkinlik yok!":nextEvent.title}</h4>
@@ -56,7 +56,7 @@ const NextPlan = ({ tasks, events }) => {
                 <div className="read_bt1"><a href="#" onClick={(e) => {e.preventDefault(); navigate("/addplan");}}>Şimdi Ekle</a></div>
              </div>
              <div className="col-md-6">
-                <div className="image_2"><img src="src/assets/images/task4.png"/></div>
+                <div className="image_2"><img src="https://res.cloudinary.com/dlg7azrx0/image/upload/v1720887745/calendar/qwrolytt8xyu2deofbl5.png"/></div>
              </div>
           </div>
        </div>

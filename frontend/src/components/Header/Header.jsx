@@ -112,10 +112,10 @@ const Header = () => {
               <li className="nav-item">
               {
                 user?( <a className="nav-link " href="#" onClick={handleLogout}>
-                  <img src="src/assets/images/search-icon.png" />
+                  <img src="https://res.cloudinary.com/dlg7azrx0/image/upload/v1720887744/calendar/zsszkodkewgxfrxvwzug.png" />
                  </a>):(
                  <a className="nav-link " href="#" onClick={goToAuth}>
-                 <img src="src/assets/images/profile.png" />
+                 <img src="https://res.cloudinary.com/dlg7azrx0/image/upload/v1720887744/calendar/xqcf9m6q6tfwxfnnzjzn.png" />
                 </a>
                 )
               }
@@ -191,10 +191,10 @@ const Header = () => {
             <li>
               {
                 user?( <a href="#" onClick={handleLogout}>
-                  <img src="src/assets/images/search-icon.png" />
+                  <img src="https://res.cloudinary.com/dlg7azrx0/image/upload/v1720887744/calendar/zsszkodkewgxfrxvwzug.png" />
                 </a>):(
                   <a href="#" onClick={goToAuth}>
-                  <img src="src/assets/images/profile.png" />
+                  <img src="https://res.cloudinary.com/dlg7azrx0/image/upload/v1720887744/calendar/xqcf9m6q6tfwxfnnzjzn.png" />
                 </a>
                 )
               }

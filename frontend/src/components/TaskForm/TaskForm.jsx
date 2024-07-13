@@ -24,7 +24,7 @@ const TaskForm = () => {
   };
 
   const onSubmit = async (values, actions) => {
-     values.userId = userId;
+    values.userId = userId;
 
     if (selectedOption === "task") {
       try {
@@ -76,7 +76,7 @@ const TaskForm = () => {
       <div className="contact_section layout_padding">
         <div className="container">
           <h1 className="watchs_taital">
-            01
+            02
             <br />
             PLAN EKLE
           </h1>
@@ -179,19 +179,23 @@ const TaskForm = () => {
                       Bu bir etkinlik🎉
                     </label>
                   </div>
-{
-    !userId?(<button className="button-submit" onClick={navigate("/auth")}>
-      Giriş Yap
-    </button>):( <button type="submit" className="button-submit">
-                    EKLE
-                  </button>)
-}
-                 
+                  {!userId ? (
+                    <button
+                      className="button-submit"
+                      onClick={navigate("/auth")}
+                    >
+                      Giriş Yap
+                    </button>
+                  ) : (
+                    <button type="submit" className="button-submit">
+                      EKLE
+                    </button>
+                  )}
                 </div>
               </div>
               <div className="col-md-6 padding_right_0">
                 <div className="map_section">
-                  <img src="src/assets/images/task12.png" />
+                  <img src="https://res.cloudinary.com/dlg7azrx0/image/upload/v1720887745/calendar/wms2bh1indxedxz3mwog.png" />
                 </div>
               </div>
             </form>
