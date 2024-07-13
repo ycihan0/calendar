@@ -1,32 +1,33 @@
+import moment from "moment";
 import Proptypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const NextPlan = ({ tasks, events }) => {
-  
-    const [nextTasks, setNextTasks] = useState([]);
-    const [nextEvents, setNextEvents] = useState([]);
+   const [nextTask, setNextTask] = useState(null);
+   const [nextEvent, setNextEvent] = useState(null);
 
-    const navigate=useNavigate();
+   const navigate = useNavigate();
 
-    useEffect(() => {
-        const now = new Date();
+   useEffect(() => {
+       const now = new Date();
 
-        const upcomingTasks = tasks.filter(
-            (task) => new Date(task.startDate) > now
-        );
+       // Görevleri sıralayıp ilk gelecek olanı al
+       const sortedTasks = tasks
+           .filter(task => new Date(task.startDate) > now)
+           .sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
+       const upcomingTask = sortedTasks.length > 0 ? sortedTasks[0] : null;
 
-        const upcomingEvents = events.filter(
-            (event) => new Date(event.startDate) > now
-        );
+       // Etkinlikleri sıralayıp ilk gelecek olanı al
+       const sortedEvents = events
+           .filter(event => new Date(event.startDate) > now)
+           .sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
+       const upcomingEvent = sortedEvents.length > 0 ? sortedEvents[0] : null;
 
-        setNextTasks(upcomingTasks);
-        setNextEvents(upcomingEvents);
+       setNextTask(upcomingTask);
+       setNextEvent(upcomingEvent);
 
-        console.log('Next Tasks:', upcomingTasks);
-        console.log('Next Events:', upcomingEvents);
-
-    }, []);
+   }, [tasks, events]);
 
   return (
     <div className="background_bg">
@@ -39,9 +40,9 @@ const NextPlan = ({ tasks, events }) => {
                 <div className="image_1"><img src="src/assets/images/event.png"/></div>
              </div>
              <div className="col-md-6">
-                <h4 className="uni_text">{nextTasks[0]?.title}</h4>
-                <p className="watchs_text">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip</p>
-                <h4 className="rate_text"><span style={{"color": "#b60213"}}>$</span>100</h4>
+                <h4 className="uni_text">{nextEvent===null ?"Yaklaşan bir etkinlik yok!":nextEvent.title}</h4>
+                <p className="watchs_text">{nextEvent===null ?"":nextEvent.description}</p>
+                <h4 className="rate_text"><span style={{"color": "#b60213"}}>{nextEvent===null ?"":moment(nextEvent.startDate).format("DD/MM/YYYY HH:mm")}</span> - {nextEvent===null ?"":moment(nextEvent.endDate).format("DD/MM/YYYY HH:mm")}</h4>
                 <div className="read_bt1"><a href="#" onClick={(e) => {e.preventDefault(); navigate("/addplan");}}>Şimdi Ekle</a></div>
              </div>
           </div>
@@ -49,9 +50,9 @@ const NextPlan = ({ tasks, events }) => {
        <div className="watchs_section_3">
           <div className="row">
              <div className="col-md-6">
-                <h4 className="uni_text">Uni Watch</h4>
-                <p className="watchs_text">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip</p>
-                <h4 className="rate_text"><span style={{"color": "#b60213"}}>$</span>100</h4>
+                <h4 className="uni_text">{nextTask===null ?"Yaklaşan bir görev yok!":nextTask.title}</h4>
+                <p className="watchs_text">{nextTask===null ?"":nextTask.description}</p>
+                <h4 className="rate_text"><span style={{"color": "#b60213"}}>{nextTask===null ?"":moment(nextTask.startDate).format("DD/MM/YYYY HH:mm")}</span> - {nextTask===null ?"":moment(nextTask.endDate).format("DD/MM/YYYY HH:mm")}</h4>
                 <div className="read_bt1"><a href="#" onClick={(e) => {e.preventDefault(); navigate("/addplan");}}>Şimdi Ekle</a></div>
              </div>
              <div className="col-md-6">
