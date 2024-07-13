@@ -1,10 +1,13 @@
 import Proptypes from "prop-types";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const NextPlan = ({ tasks, events }) => {
   
     const [nextTasks, setNextTasks] = useState([]);
     const [nextEvents, setNextEvents] = useState([]);
+
+    const navigate=useNavigate();
 
     useEffect(() => {
         const now = new Date();
@@ -33,13 +36,13 @@ const NextPlan = ({ tasks, events }) => {
        <div className="watchs_section_2">
           <div className="row">
              <div className="col-md-6">
-                <div className="image_1"><img src="src/assets/images/img-1.png"/></div>
+                <div className="image_1"><img src="src/assets/images/event.png"/></div>
              </div>
              <div className="col-md-6">
                 <h4 className="uni_text">{nextTasks[0]?.title}</h4>
                 <p className="watchs_text">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip</p>
                 <h4 className="rate_text"><span style={{"color": "#b60213"}}>$</span>100</h4>
-                <div className="read_bt1"><a href="#">Buy Now</a></div>
+                <div className="read_bt1"><a href="#" onClick={(e) => {e.preventDefault(); navigate("/addplan");}}>Şimdi Ekle</a></div>
              </div>
           </div>
        </div>
@@ -49,14 +52,14 @@ const NextPlan = ({ tasks, events }) => {
                 <h4 className="uni_text">Uni Watch</h4>
                 <p className="watchs_text">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip</p>
                 <h4 className="rate_text"><span style={{"color": "#b60213"}}>$</span>100</h4>
-                <div className="read_bt1"><a href="#">Buy Now</a></div>
+                <div className="read_bt1"><a href="#" onClick={(e) => {e.preventDefault(); navigate("/addplan");}}>Şimdi Ekle</a></div>
              </div>
              <div className="col-md-6">
-                <div className="image_2"><img src="src/assets/images/img-2.png"/></div>
+                <div className="image_2"><img src="src/assets/images/task4.png"/></div>
              </div>
           </div>
        </div>
-       <div className="seemore_bt"><a href="#">See More</a></div>
+       <div className="seemore_bt"><a href="#" onClick={(e) => {e.preventDefault(); navigate("/monthly");}}>Hepsini Gör</a></div>
     </div>
  </div>
  </div>

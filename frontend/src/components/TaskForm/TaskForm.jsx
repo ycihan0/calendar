@@ -179,7 +179,7 @@ const TaskForm = () => {
               </div>
               <div className="col-md-6 padding_right_0">
                 <div className="map_section">
-                  <img src="src/assets/images/map-img.png" />
+                  <img src="src/assets/images/task12.png"  />
                 </div>
               </div>
             </form>
