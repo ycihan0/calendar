@@ -4,24 +4,28 @@ import { taskSchema } from "../../schema/taskSchema";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const TaskForm = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const [userId, setUserId] = useState("");
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-   const user = JSON.parse(localStorage.getItem("user"));
-   if (user && user.id) {
-     setUserId(user.id);
-   }
- }, []);
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user && user.id) {
+      setUserId(user.id);
+    }
+  }, []);
 
   const handleChangeOption = (e) => {
     setSelectedOption(e.target.value);
   };
 
   const onSubmit = async (values, actions) => {
-   values.userId = userId;
+     values.userId = userId;
+
     if (selectedOption === "task") {
       try {
         const res = await axios.post(
@@ -36,7 +40,7 @@ const TaskForm = () => {
         console.log(error);
         toast.error("Birşeyler ters gitti.");
       }
-    }else if (selectedOption === "event") {
+    } else if (selectedOption === "event") {
       try {
         const res = await axios.post(
           `${import.meta.env.VITE_API_BASE_URL}/events`,
@@ -143,7 +147,9 @@ const TaskForm = () => {
                       onBlur={handleBlur}
                     />
                     {touched.description && (
-                      <span className="error-messages">{errors.description}</span>
+                      <span className="error-messages">
+                        {errors.description}
+                      </span>
                     )}
                   </div>
                   <div className="input-group">
@@ -173,13 +179,19 @@ const TaskForm = () => {
                       Bu bir etkinlik🎉
                     </label>
                   </div>
-                  
-                  <button type="submit" className="button-submit">EKLE</button>
+{
+    !userId?(<button className="button-submit" onClick={navigate("/auth")}>
+      Giriş Yap
+    </button>):( <button type="submit" className="button-submit">
+                    EKLE
+                  </button>)
+}
+                 
                 </div>
               </div>
               <div className="col-md-6 padding_right_0">
                 <div className="map_section">
-                  <img src="src/assets/images/task12.png"  />
+                  <img src="src/assets/images/task12.png" />
                 </div>
               </div>
             </form>

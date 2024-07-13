@@ -20,8 +20,12 @@ const Header = () => {
   const handleLogout = (e) => {
     e.preventDefault();
     localStorage.removeItem("user");
-    window.location.href = "/auth";
+   navigate("/auth")
   };
+  const goToAuth=(e)=>{
+    e.preventDefault();
+    navigate("/auth")
+  }
 
   return (
     <div className="header_main">
@@ -106,9 +110,15 @@ const Header = () => {
                 </a>
               </li>
               <li className="nav-item">
-                 <a className="nav-link " href="#" onClick={handleLogout}>
+              {
+                user?( <a className="nav-link " href="#" onClick={handleLogout}>
                   <img src="src/assets/images/search-icon.png" />
-                 </a>
+                 </a>):(
+                 <a className="nav-link " href="#" onClick={goToAuth}>
+                 <img src="src/assets/images/profile.png" />
+                </a>
+                )
+              }
               </li>
             </ul>
           </div>
@@ -179,9 +189,16 @@ const Header = () => {
             </li>
 
             <li>
-              <a href="#" onClick={handleLogout}>
-                <img src="src/assets/images/search-icon.png" />
-              </a>
+              {
+                user?( <a href="#" onClick={handleLogout}>
+                  <img src="src/assets/images/search-icon.png" />
+                </a>):(
+                  <a href="#" onClick={goToAuth}>
+                  <img src="src/assets/images/profile.png" />
+                </a>
+                )
+              }
+             
             </li>
           </ul>
         </div>

@@ -9,18 +9,18 @@ import MonthlyView from "./components/MonthlyView/MonthlyView";
 import WeeklyView from "./components/WeeklyView/WeeklyView";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // const [isAuthenticated, setIsAuthenticated] = useState(false);
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
   const [events, setEvents] = useState([]);
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user) {
-      setIsAuthenticated(true);
-    } else {
-      setIsAuthenticated(false);
-    }
+    // const user = localStorage.getItem("user");
+    // if (user) {
+    //   setIsAuthenticated(true);
+    // } else {
+    //   setIsAuthenticated(false);
+    // }
 
     const getAllData = async () => {
       try {
@@ -40,7 +40,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={isAuthenticated ? <Home events={events} tasks={tasks}/> : <Auth />}>
+      <Route path="/" element={<Home events={events} tasks={tasks}/> }>
         <Route path="addplan" element={<TaskForm />} />
         <Route
           path="monthly"
