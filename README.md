@@ -10,13 +10,12 @@ Bu proje, kullanıcıların görevlerini ve etkinliklerini aylık, günlük ve h
 - React
 - Node.js
 # Özellikleri
--Kullanıcı kimlik doğrulaması
--Görev ve etkinlik ekleme
--Görevlere ve etkinliklerne göre görüntüleme
--Aylık, günlük ve haftalık görüntüleme
--Her takvim kaydı bir görev/etkinlik adı, tarih ve saat içerir.
--Kullanıcılar görev veya etkinlik ekleyebilir.
--
+- Kullanıcı kimlik doğrulaması
+- Görev ve etkinlik ekleme
+- Görevlere ve etkinliklerne göre görüntüleme
+- Aylık, günlük ve haftalık görüntüleme
+- Her takvim kaydı bir görev/etkinlik adı, tarih ve saat içerir.
+- Kullanıcılar görev veya etkinlik ekleyebilir.
 #  Ne kullanıldı?
 - React 
 - React Router
