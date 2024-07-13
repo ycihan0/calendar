@@ -43,7 +43,6 @@ const DailyView = ({ tasks, events }) => {
     setPlans(mergedArray);
     setCurrentArray(mergedArray);
 
-    console.log(plans);
   }, [params.date, tasks, events]);
 
   return (

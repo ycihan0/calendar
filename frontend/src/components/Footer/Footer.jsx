@@ -1,8 +1,6 @@
-import "./Footer.scss"
-
 const Footer = () => {
   return (
-    <footer>
+    <>
     <div className="footer_section layout_padding">
     <div className="container">
        <h3 className="follow_text">Şimdi takip et</h3>
@@ -33,7 +31,7 @@ const Footer = () => {
        <p className="copyright_text">2024 Cihan Yüksel tarafından ❤️ ile yapıldı.</p>
     </div>
  </div>
- </footer>
+ </>
   )
 }
 

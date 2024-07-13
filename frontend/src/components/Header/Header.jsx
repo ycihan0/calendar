@@ -24,7 +24,7 @@ const Header = () => {
   };
 
   return (
-    <header className="header_main">
+    <div className="header_main">
       <div className="mobile_menu">
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="logo_mobile">
@@ -106,9 +106,9 @@ const Header = () => {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link " href="#">
+                 <a className="nav-link " href="#" onClick={handleLogout}>
                   <img src="src/assets/images/search-icon.png" />
-                </a>
+                 </a>
               </li>
             </ul>
           </div>
@@ -186,7 +186,7 @@ const Header = () => {
           </ul>
         </div>
       </div>
-    </header>
+    </div>
   );
 };
 

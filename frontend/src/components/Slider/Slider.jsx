@@ -10,7 +10,7 @@ const Slider = () => {
           <div className="carousel-item active">
              <div className="container">
                 <h1 className="banner_taital">Planlar</h1>
-                <p className="banner_text">Hayatınızı düzenlemenin en pratik yolu! Takvim Entegrasyonu Sistemi ile gplanlı yaşayın ve zamanınızı verimli kullanın. </p>
+                <p className="banner_text">Hayatınızı düzenlemenin en pratik yolu! Takvim Entegrasyonu Sistemi ile planlı yaşayın ve zamanınızı verimli kullanın. </p>
                 <div className="read_bt"><a href="#"  onClick={(e) => {e.preventDefault(); navigate("/addplan");}}>Şimdi Ekle</a></div>
              </div>
           </div>
