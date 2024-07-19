@@ -13,6 +13,7 @@ function App() {
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
   const [events, setEvents] = useState([]);
   const [tasks, setTasks] = useState([]);
+  const [updateKey, setUpdateKey] = useState(0);
 
   useEffect(() => {
     // const user = localStorage.getItem("user");
@@ -36,12 +37,12 @@ function App() {
     };
 
     getAllData();
-  }, [apiUrl]);
+  }, [apiUrl, updateKey]);
 
   return (
     <Routes>
       <Route path="/" element={<Home events={events} tasks={tasks}/> }>
-        <Route path="addplan" element={<TaskForm />} />
+        <Route path="addplan" element={<TaskForm setUpdateKey={setUpdateKey} />} />
         <Route
           path="monthly"
           element={<MonthlyView events={events} tasks={tasks} />}

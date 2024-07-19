@@ -1,10 +1,13 @@
 import Proptypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./MonthlyView.scss";
 import { useNavigate } from "react-router-dom";
 
 const MonthlyView = ({ tasks, events }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [displayedTasks, setDisplayedTasks] = useState([]);
+  const [displayedEvents, setDisplayedEvents] = useState([]);
+
   const daysOfWeek = ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"];
 
   const navigate = useNavigate();
@@ -54,12 +57,12 @@ const MonthlyView = ({ tasks, events }) => {
         i
       );
       //Takvimdeki gün ile etkinlikteki eşit olan günleri filtrele
-      const currentDayEvents = events.filter(
+      const currentDayEvents = displayedEvents.filter(
         (event) =>
           new Date(event.startDate).toDateString() === date.toDateString()
       );
 
-      const currentDayTasks = tasks.filter(
+      const currentDayTasks = displayedTasks.filter(
         (task) =>
           new Date(task.startDate).toDateString() === date.toDateString()
       );
@@ -110,6 +113,11 @@ const MonthlyView = ({ tasks, events }) => {
       new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1)
     );
   };
+
+  useEffect(() => {
+    setDisplayedTasks(tasks);
+    setDisplayedEvents(events);
+  }, [tasks, events]);
 
   return (
     <div className="background_bg">

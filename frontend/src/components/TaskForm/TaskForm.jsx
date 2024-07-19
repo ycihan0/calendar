@@ -1,4 +1,5 @@
 import { useFormik } from "formik";
+import Proptypes from "prop-types";
 import "./TaskForm.scss";
 import { taskSchema } from "../../schema/taskSchema";
 import { useEffect, useState } from "react";
@@ -6,7 +7,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-const TaskForm = () => {
+const TaskForm = ({setUpdateKey}) => {
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
   const [selectedOption, setSelectedOption] = useState("");
   const [userId, setUserId] = useState("");
 
@@ -17,7 +19,7 @@ const TaskForm = () => {
     if (user && user.id) {
       setUserId(user.id);
     }
-  }, []);
+  }, [apiUrl]);
 
   const handleChangeOption = (e) => {
     setSelectedOption(e.target.value);
@@ -29,12 +31,13 @@ const TaskForm = () => {
     if (selectedOption === "task") {
       try {
         const res = await axios.post(
-          `${import.meta.env.VITE_API_BASE_URL}/tasks`,
+          `${apiUrl}/tasks`,
           values
         );
         if (res.status === 201) {
           actions.resetForm();
           toast.success("Görev Başarıyla Eklendi");
+          setUpdateKey(prev => prev + 1);
         }
       } catch (error) {
         console.log(error);
@@ -43,12 +46,13 @@ const TaskForm = () => {
     } else if (selectedOption === "event") {
       try {
         const res = await axios.post(
-          `${import.meta.env.VITE_API_BASE_URL}/events`,
+          `${apiUrl}/events`,
           values
         );
         if (res.status === 201) {
           actions.resetForm();
           toast.success("Etkinlik Başarıyla Eklendi");
+          setUpdateKey(prev => prev + 1);
         }
       } catch (error) {
         console.log(error);
@@ -207,3 +211,6 @@ const TaskForm = () => {
 };
 
 export default TaskForm;
+TaskForm.propTypes = {
+  setUpdateKey: Proptypes.func
+};
